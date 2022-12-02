@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  reticulaappdb:
+    container_name: reticula-db
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    ports:
+      - 8002:1433
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Spiderlio05
+  reticula:
+    container_name: reticula-app
+    image: ${DOCKER_REGISTRY-}reticula
+    build:
+      context: .
+      dockerfile: Reticula/Dockerfile
+    ports:
+      - 8001:80
+    depends_on: 
+      - reticulaappdb
+    environment:
+      - DB_HOST=reticulaappdb
+      - DB_NAME=Reticula
+      - DB_SA_PASSWORD=Spiderlio05
