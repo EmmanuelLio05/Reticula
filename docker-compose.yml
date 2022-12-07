@@ -16,7 +16,7 @@ services:
       context: .
       dockerfile: Reticula/Dockerfile
     ports:
-      - 8001:80
+      - 8001:443
     depends_on: 
       - reticulaappdb
     environment:
